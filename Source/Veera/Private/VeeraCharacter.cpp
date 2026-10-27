@@ -1,10 +1,13 @@
 #include "VeeraCharacter.h"
+
 #include "Camera/CameraComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Components/CapsuleComponent.h"
 #include "GameFramework/Controller.h"
-#include "GameFramework/InputSettings.h"
+#include "VeeraTrainingTarget.h"
+#include "VeeraGameMode.h"
+#include "Engine/World.h"
 
 AVeeraCharacter::AVeeraCharacter()
 {
@@ -49,6 +52,7 @@ void AVeeraCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
     PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
     PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
     PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+    PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AVeeraCharacter::InspectTarget);
 }
 
 void AVeeraCharacter::MoveForward(float Value)
@@ -67,12 +71,29 @@ void AVeeraCharacter::MoveRight(float Value)
     }
 }
 
-void AVeeraCharacter::TurnAtRate(float Value)
+void AVeeraCharacter::InspectTarget()
 {
-    AddControllerYawInput(Value);
-}
+    if (!FirstPersonCamera || !GetWorld())
+    {
+        return;
+    }
 
-void AVeeraCharacter::LookUpAtRate(float Value)
-{
-    AddControllerPitchInput(Value);
+    const FVector Start = FirstPersonCamera->GetComponentLocation();
+    const FVector End = Start + FirstPersonCamera->GetForwardVector() * InteractionRange;
+    FHitResult Hit;
+    FCollisionQueryParams QueryParams(SCENE_QUERY_STAT(VeeraInspectTarget), false, this);
+
+    if (GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, QueryParams))
+    {
+        if (AVeeraTrainingTarget* Target = Cast<AVeeraTrainingTarget>(Hit.GetActor()))
+        {
+            if (Target->CompleteDrill())
+            {
+                if (AVeeraGameMode* GameMode = GetWorld()->GetAuthGameMode<AVeeraGameMode>())
+                {
+                    GameMode->RegisterTargetCompleted();
+                }
+            }
+        }
+    }
 }

@@ -11,4 +11,14 @@ class VEERA_API AVeeraGameMode : public AGameModeBase
 
 public:
     AVeeraGameMode();
+
+    virtual void BeginPlay() override;
+    void RegisterTargetCompleted();
+
+private:
+    void BuildTrainingGround();
+    void SpawnBlock(const FVector& Location, const FVector& Scale, const FRotator& Rotation = FRotator::ZeroRotator);
+
+    int32 CompletedTargets = 0;
+    int32 TotalTargets = 3;
 };

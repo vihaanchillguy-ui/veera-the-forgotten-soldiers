@@ -19,12 +19,14 @@ protected:
 private:
     void MoveForward(float Value);
     void MoveRight(float Value);
-    void TurnAtRate(float Value);
-    void LookUpAtRate(float Value);
+    void InspectTarget();
 
     UPROPERTY(VisibleAnywhere, Category = "VEERA|Camera")
     TObjectPtr<class USpringArmComponent> CameraBoom;
 
     UPROPERTY(VisibleAnywhere, Category = "VEERA|Camera")
     TObjectPtr<class UCameraComponent> FirstPersonCamera;
+
+    UPROPERTY(EditDefaultsOnly, Category = "VEERA|Training", meta = (ClampMin = "100.0"))
+    float InteractionRange = 700.0f;
 };

@@ -2,40 +2,34 @@
 
 A historically grounded World War II game project centred on the British Indian Armed Forces, personal stories, family, and service.
 
-## Main project: Unreal Engine 5
+## Unreal Engine 5.6 project
 
-The repository now contains the beginning of a native Unreal Engine C++ project:
+This repository contains a native Unreal Engine C++ project:
 
-- `Veera.uproject` project descriptor (configured for Unreal Engine 5.6)
-- A first-person character class with mouse look, WASD movement and jump
-- A default game mode that spawns the VEERA character
-- Basic keyboard and mouse input mappings
+- `Veera.uproject` targets Unreal Engine 5.6 and enables Enhanced Input as a project plugin.
+- `AVeeraCharacter` provides first-person mouse look, WASD movement, jump and target interaction.
+- `AVeeraGameMode` builds a small training yard at runtime from Unreal's built-in basic shapes.
+- Three range targets can be inspected with **E** to complete the first drill.
 
-**This is a project scaffold, not a finished game.** It has not been compiled or opened in Unreal Editor in this environment. The training camp, character models, animations, weapons, cinematics, audio, materials and final levels still need to be created or imported in Unreal Engine. The old `index.html` is only a legacy browser prototype and is not the Unreal game.
+The training yard is deliberately a code-built prototype. It has no imported character art, animations, weapons, audio or saved `.umap` yet. The old `index.html` is a legacy browser prototype and is not the Unreal game. This project has not been compiled or opened in Unreal Editor in this environment.
 
-## Open the project on macOS
+## Open and play on macOS
 
-1. Install Unreal Engine 5.6 (or update the project configuration to match the installed engine version) through the Epic Games Launcher.
-2. Download or clone this repository to your Mac.
-3. Double-click `Veera.uproject` and allow Unreal to generate project files and compile the C++ module. If prompted, install Apple's Xcode Command Line Tools.
-4. Once the editor opens, create a level and save it as `/Game/Maps/TrainingGround`.
-5. Add a Player Start and a GameMode override if needed, then press **Play** to test the basic character.
+1. Install Unreal Engine 5.6 through the Epic Games Launcher.
+2. Clone or download this repository.
+3. Double-click `Veera.uproject`. Let Unreal generate project files and compile the C++ module. If prompted, install Apple's Xcode Command Line Tools.
+4. Create a new **Basic** level (or open the default level) and press **Play**. The game mode builds the training yard when play begins.
+5. Use **WASD** to move, the **mouse** to look, **Space** to jump, and **E** while facing a range target to inspect it.
 
-The source code is under `Source/Veera`; default input and game-mode settings are under `Config`.
+If the editor does not use `AVeeraGameMode` in a newly created level, set it in **World Settings → GameMode Override**. Project defaults are in `Config/DefaultEngine.ini`.
 
-## Development priorities
+## Current prototype scope
 
-1. **Playable vertical slice:** training-ground level, first-person controls, basic interactable training targets and clear objectives.
-2. **Environment:** period-informed barracks, parade square, obstacle course, training lanes, props, terrain, lighting and atmosphere.
-3. **Characters:** historically appropriate soldier assets, rigging, locomotion, marching/drill animations, instructor behaviours and crowd placement.
-4. **Cinematics:** family farewell sequence, camera blocking, facial/body animation, dialogue, subtitles and transitions.
-5. **Audio:** original score, environmental ambience, drill commands, footsteps and weapon sounds.
-6. **Campaign:** researched missions, progression, save data and further gameplay systems.
+The code-built yard uses generic primitive geometry so it needs no third-party assets. It is a foundation for iteration, not final environment art. Next production steps:
 
-## Assets and historical accuracy
+1. Save and refine the yard as `/Game/Maps/TrainingGround`, replacing blockout geometry with licensed, period-appropriate assets.
+2. Add authored training objectives, an instructor, UI feedback and audio.
+3. Add researched uniforms, equipment, units and campaign details; avoid presenting invented dialogue or characters as historical fact.
+4. Build the family farewell scene, further missions, progression and save data.
 
-Use licensed assets and keep a record of their source and permitted use. Unreal Engine's built-in starter content and learning assets can help prototype the first level; higher-quality character models, uniforms, props and animations will need appropriate licensed assets or custom work. Avoid presenting invented dialogue or characters as historical fact. Research period uniforms, ranks, equipment, units and campaigns, and represent Sikh cultural and religious details respectfully.
-
-## Legacy browser prototype
-
-`index.html` remains in the repository as an old proof of concept. GitHub Pages can host that page, but **it does not run the Unreal Engine game**. Unreal development and packaging must be done with Unreal Engine on a supported computer.
+Use assets only under licences that permit the intended use. Represent Sikh cultural and religious details respectfully and verify historical specifics before they appear in the game.
