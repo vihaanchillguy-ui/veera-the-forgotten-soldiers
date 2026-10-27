@@ -1,46 +1,41 @@
 # VEERA: The Forgotten Soldiers
 
-A historically grounded World War II game concept centred on the British Indian Armed Forces, personal stories, family, and service.
+A historically grounded World War II game project centred on the British Indian Armed Forces, personal stories, family, and service.
 
-## Current build: browser prototype
+## Main project: Unreal Engine 5
 
-The repository currently contains an early, playable first-person training-range prototype in `index.html`. It includes:
-- A story-led opening with a sister's farewell and the name "Veera"
-- Army, Navy, and Air Force selection screens
-- A 3D training ground, movement, mouse-look, a simple placeholder rifle, and target practice
-- A lightweight HUD and basic range objective
+The repository now contains the beginning of a native Unreal Engine C++ project:
 
-### Play it locally
-Because the prototype imports Three.js from a CDN, run it from a local web server rather than opening the file directly.
+- `Veera.uproject` project descriptor (configured for Unreal Engine 5.6)
+- A first-person character class with mouse look, WASD movement and jump
+- A default game mode that spawns the VEERA character
+- Basic keyboard and mouse input mappings
 
-With Python installed:
-```bash
-python3 -m http.server 8000
-```
-Then visit `http://localhost:8000`.
+**This is a project scaffold, not a finished game.** It has not been compiled or opened in Unreal Editor in this environment. The training camp, character models, animations, weapons, cinematics, audio, materials and final levels still need to be created or imported in Unreal Engine. The old `index.html` is only a legacy browser prototype and is not the Unreal game.
 
-### Publish with GitHub Pages
-1. Open the repository's **Settings → Pages**.
-2. Under **Build and deployment**, select **Deploy from a branch**.
-3. Select branch **main** and folder **/(root)**, then save.
-4. Wait for the Pages deployment to finish. The site will be available at:
-   `https://vihaanchillguy-ui.github.io/veera-the-forgotten-soldiers/`
+## Open the project on macOS
 
-If Pages is unavailable or the deployment fails, check the Actions tab and repository Pages settings.
+1. Install Unreal Engine 5.6 (or update the project configuration to match the installed engine version) through the Epic Games Launcher.
+2. Download or clone this repository to your Mac.
+3. Double-click `Veera.uproject` and allow Unreal to generate project files and compile the C++ module. If prompted, install Apple's Xcode Command Line Tools.
+4. Once the editor opens, create a level and save it as `/Game/Maps/TrainingGround`.
+5. Add a Player Start and a GameMode override if needed, then press **Play** to test the basic character.
 
-## Important scope note
+The source code is under `Source/Veera`; default input and game-mode settings are under `Config`.
 
-This is a prototype, not a finished Battlefield-scale game. The 3D range uses simple procedural placeholder assets and has no real multiplayer, save accounts, production-grade weapon simulation, naval or aircraft gameplay, or final historical assets yet. The long-term target is a realistic Unreal Engine 5 game with dedicated multiplayer servers; GitHub is source control and can host this companion prototype, but it does not itself run multiplayer game servers.
+## Development priorities
 
-## Historical approach
+1. **Playable vertical slice:** training-ground level, first-person controls, basic interactable training targets and clear objectives.
+2. **Environment:** period-informed barracks, parade square, obstacle course, training lanes, props, terrain, lighting and atmosphere.
+3. **Characters:** historically appropriate soldier assets, rigging, locomotion, marching/drill animations, instructor behaviours and crowd placement.
+4. **Cinematics:** family farewell sequence, camera blocking, facial/body animation, dialogue, subtitles and transitions.
+5. **Audio:** original score, environmental ambience, drill commands, footsteps and weapon sounds.
+6. **Campaign:** researched missions, progression, save data and further gameplay systems.
 
-Use verified historical references for unit names, uniforms, ranks, equipment, campaigns, and service branches. Clearly distinguish invented characters and dialogue from documented history. Sikh cultural and religious items and expressions should be represented respectfully and accurately.
+## Assets and historical accuracy
 
-## Roadmap
-- [ ] Replace placeholder geometry with researched period-appropriate assets
-- [ ] Add character creator and saved story progress
-- [ ] Add academy training tasks and scripted scenes
-- [ ] Add historically researched campaign missions
-- [ ] Plan Unreal Engine 5 production project
-- [ ] Build authoritative dedicated-server multiplayer and matchmaking
-- [ ] Expand into naval and aircrew gameplay
+Use licensed assets and keep a record of their source and permitted use. Unreal Engine's built-in starter content and learning assets can help prototype the first level; higher-quality character models, uniforms, props and animations will need appropriate licensed assets or custom work. Avoid presenting invented dialogue or characters as historical fact. Research period uniforms, ranks, equipment, units and campaigns, and represent Sikh cultural and religious details respectfully.
+
+## Legacy browser prototype
+
+`index.html` remains in the repository as an old proof of concept. GitHub Pages can host that page, but **it does not run the Unreal Engine game**. Unreal development and packaging must be done with Unreal Engine on a supported computer.
